@@ -18,35 +18,19 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const messagesEndRef = useRef(null);
 
-  // useEffect(() => {
-  //   socket.on("connect", () => {
-  //     console.log("Connected to WebSocket");
-  //     socket.emit("connect_chat", { session_id: "abc" });
-  //   });
-
-  //   socket.on("message_response", (data) => {
-  //     console.log("data in message_response", data); 
-  //     setMessages((prev) => [...prev, { sender: "AI", text: data.response }]);
-  //   });
-
-  //   socket.on("rate_limit_exceeded", (data) => {
-  //     console.log("data in rate_limit_exceeded", data);
-  //     alert(data.error);
-  //   });
-
-  //   return () => {
-  //     socket.off("message_response");
-  //     socket.off("rate_limit_exceeded");
-  //   };
-  // }, []);
-
-
   useEffect(() => {
-    socket.on("message_response", (data) => {
+    const handleMessageResponse = (data) => {
       console.log("data in message_response", data);
   
-      // Check if the last message is from AI, and append instead of creating a new message
       setMessages((prev) => {
+        if (
+          prev.length > 0 &&
+          prev[prev.length - 1].sender === "AI" &&
+          prev[prev.length - 1].text.includes(data.response)
+        ) {
+          return prev; // Prevent duplicate responses
+        }
+  
         if (prev.length > 0 && prev[prev.length - 1].sender === "AI") {
           const updatedMessages = [...prev];
           updatedMessages[updatedMessages.length - 1].text += " " + data.response;
@@ -55,10 +39,14 @@ export default function Chat() {
           return [...prev, { sender: "AI", text: data.response }];
         }
       });
-    });
+    };
   
+    // Attach event listener
+    socket.on("message_response", handleMessageResponse);
+  
+    // Cleanup function to prevent duplicate listeners
     return () => {
-      socket.off("message_response");
+      socket.off("message_response", handleMessageResponse);
     };
   }, []);
   
@@ -73,7 +61,6 @@ export default function Chat() {
       setInput("");
     }
   };
-console.log(messages,"=========messages");
 
   return (
     <div className="chat-container flex flex-col h-screen max-w-sm mx-auto p-4 bg-gray-100">

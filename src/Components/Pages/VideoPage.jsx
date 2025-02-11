@@ -200,13 +200,13 @@ function VideoCard({ video, isOpen, setIsOpen }) {
       <div style={{ position: "absolute", top: 20, right: 8, display: "flex", flexDirection: "column", gap: 10 }}>
         <button
           onClick={handleShare}
-          style={{ color: "white", background: "rgba(0,0,0,.5)", padding: 2, borderRadius: "100%", height: "48px", width: "48px", border: "none" }}
+          style={{ color: "white", background: "rgba(0,0,0,.5)", padding: 2, borderRadius: "100%", height: "48px", width: "48px", border: "none",display:"flex",alignItems:"center",justifyContent:'center' }}
         >
           <Share2 size={24} />
         </button>
         <button
           onClick={toggleMute}
-          style={{ color: "white", background: "rgba(0,0,0,.5)", padding: 2, borderRadius: "100%", height: "48px", width: "48px", border: "none" }}
+          style={{ color: "white", background: "rgba(0,0,0,.5)", padding: 2, borderRadius: "100%", height: "48px", width: "48px", border: "none",display:"flex",alignItems:"center",justifyContent:'center' }}
         >
           {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
         </button>
