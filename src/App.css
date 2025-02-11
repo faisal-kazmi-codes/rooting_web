@@ -1,6 +1,278 @@
-*{
-  margin: 0;
-  padding: 0;
+@import "tailwindcss";
+* {
+  /* margin: 0;
+  padding: 0; */
   box-sizing: border-box;
   font-family: sans-serif;
 }
+.video-container{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: end;
+  padding: 0px;
+}
+
+
+/* Container */
+.story-viewer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: black; */
+}
+
+.story-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  margin: auto;
+  overflow: hidden;
+}
+.subfeed-container{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+.subfeed {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  margin: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 50px;
+}
+.subfeed-center{
+  height: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.openappbtn{
+  background-color: #0085FF;
+  border: none;
+  height: 32px;
+  width: 96px;
+  color: #fff;
+  font-weight: 500;
+  margin-top: 20px;
+}
+/* Image & Video */
+.story-image,
+.story-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.video-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mute Button */
+.mute-button {
+  position: absolute;
+  top: 90px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 0;
+}
+
+/* Share Button */
+.share-button {
+  position: absolute;
+  top: 35px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 0;
+
+}
+
+/* Order Now Section */
+.order-now {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navigation Buttons */
+.nav-left-btn,
+.nav-right-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 45% 50px;
+  border: none;
+}
+
+.nav-left-btn {
+  left: 10px;
+}
+
+.nav-right-btn {
+  right: 10px;
+}
+
+ /* Share Modal */
+.share-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.share-content {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.share-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.share-option,
+.share-close {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: none;
+}
+
+.share-option {
+  background: linear-gradient(45deg, #007bff, #00b4db);
+  color: white;
+}
+
+.share-option:hover {
+  background: linear-gradient(45deg, #0056b3, #008cba);
+}
+
+.share-close {
+  background: rgb(255, 77, 77);
+  color: white;
+}
+
+.share-close:hover {
+  background: rgb(220, 50, 50);
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* Progress Bar Container */
+.progress-bar-container {
+  display: flex;
+  gap: 4px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  padding: 0 10px;
+  z-index: 10;
+}
+
+/* Individual Progress Bar */
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Filled Progress */
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: white;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Active Progress Bar */
+.progress-fill.active {
+  width: 100%;
+}
+
+
+
+/* ============================================ */
+
